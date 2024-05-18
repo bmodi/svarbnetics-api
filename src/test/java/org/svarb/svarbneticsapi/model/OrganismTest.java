@@ -14,20 +14,18 @@ public class OrganismTest {
     }
 
     @Test
-    public void testOrganismInitialization() {
+    public void consructor() {
         assertEquals(1, organism.getId());
         assertEquals("Human", organism.getName());
     }
 
     @Test
-    public void testGetId() {
+    public void getId() {
         assertEquals(1, organism.getId());
     }
 
     @Test
-    public void testGetName() {
+    public void getName() {
         assertEquals("Human", organism.getName());
     }
-
-    // Add more test cases as needed to cover other behaviors of Organism class
 }
