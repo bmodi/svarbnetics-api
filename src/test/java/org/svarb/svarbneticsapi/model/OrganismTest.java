@@ -1,8 +1,8 @@
 package org.svarb.svarbneticsapi.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class OrganismTest {
 
@@ -14,7 +14,7 @@ public class OrganismTest {
     }
 
     @Test
-    public void consructor() {
+    public void constructor() {
         assertEquals(1, organism.getId());
         assertEquals("Human", organism.getName());
     }
