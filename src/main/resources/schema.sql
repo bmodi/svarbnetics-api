@@ -23,18 +23,27 @@ CREATE TABLE trait (
 
 -- Create the gene table
 CREATE TABLE gene (
-  gene_id IDENTITY PRIMARY KEY,
-  symbol VARCHAR(255) NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  hgnc_id VARCHAR(255) NOT NULL,
-  trait_id INT NOT NULL,
-  CONSTRAINT fk_trait FOREIGN KEY (trait_id) REFERENCES trait(trait_id)
+    gene_id SERIAL PRIMARY KEY,
+    symbol VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    trait_id INT NOT NULL,
+    dominant BOOLEAN,
+    FOREIGN KEY (trait_id) REFERENCES trait(trait_id)
 );
 
--- Create the view organism_trait_view
-CREATE VIEW organism_trait_view AS
-SELECT o.name AS organism_name, c.chromosome_number, t.name AS trait_name, g.name AS gene_name
-FROM organism o
-JOIN chromosome c ON o.organism_id = c.organism_id
-JOIN trait t ON c.chromosome_id = t.chromosome_id
-JOIN gene g ON t.trait_id = g.trait_id;
+
+-- Create a view to combine organism, trait and gene data
+CREATE VIEW organism_gene_view AS
+SELECT
+    o.name AS organism_name,
+    c.chromosome_number,
+    t.locus,
+    t.name AS trait_name,
+    g.symbol AS gene_symbol,
+    g.name AS gene_name,
+    g.dominant AS dominant
+FROM
+    organism o
+    JOIN chromosome c ON o.organism_id = c.organism_id
+    JOIN trait t ON c.chromosome_id = t.chromosome_id
+    JOIN gene g ON t.trait_id = g.trait_id;
