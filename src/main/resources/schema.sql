@@ -35,6 +35,7 @@ CREATE TABLE gene (
 -- Create a view to combine organism, trait and gene data
 CREATE VIEW organism_gene_view AS
 SELECT
+    o.organism_id AS organism_id,
     o.name AS organism_name,
     c.chromosome_number,
     t.locus,

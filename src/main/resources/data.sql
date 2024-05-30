@@ -30,37 +30,49 @@ INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(orga
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '22');
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '23');
 
+----------------------------------------------------
 -- Inserting pea plant organism with 7 chromosomes
+----------------------------------------------------
 INSERT INTO organism (name) VALUES ('pea plant');
+
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '1');
-INSERT INTO trait (name, locus, chromosome_id) VALUES ('Color of seed albumen (Y)', 'L2', (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism)));
+
+-- Insert trait and genes for 'Color of seed albumen (Y)'
+INSERT INTO trait (name, locus, chromosome_id) VALUES ('Colour of seed albumen (Y)', 'L2', (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism)));
+INSERT INTO gene (symbol, name, dominant, trait_id) 
+VALUES ('Y', 'Yellow seed colour', TRUE, 
+    (SELECT trait_id FROM trait WHERE name = 'Colour of seed albumen (Y)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
+INSERT INTO gene (symbol, name, dominant, trait_id) 
+VALUES ('y', 'Green seed colour', FALSE,
+    (SELECT trait_id FROM trait WHERE name = 'Colour of seed albumen (Y)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
+
+-- Insert trait and genes for 'Position of flowers (A)'
 INSERT INTO trait (name, locus, chromosome_id) VALUES ('Position of flowers (A)', 'L5', (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism)));
-
--- Insert genes for 'Color of seed albumen (Y)'
 INSERT INTO gene (symbol, name, dominant, trait_id) 
-VALUES ('Y', 'Dominant allele for yellow seed color', TRUE, 
-    (SELECT trait_id FROM trait WHERE name = 'Color of seed albumen (Y)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
-
+VALUES ('A', 'Axial flower position', TRUE, 
+    (SELECT trait_id FROM trait WHERE name = 'Position of flowers (A)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
 INSERT INTO gene (symbol, name, dominant, trait_id) 
-VALUES ('y', 'Recessive allele for green seed color', FALSE,
-    (SELECT trait_id FROM trait WHERE name = 'Color of seed albumen (Y)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
-
-
+VALUES ('a', 'Terminal flower position', FALSE,
+    (SELECT trait_id FROM trait WHERE name = 'Position of flowers (A)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
 
 
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '2');
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '3');
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '4');
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '5');
+
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '6');
-INSERT INTO trait (name, locus, chromosome_id) VALUES ('Color of flower (P)', 'L3', (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism)));
+
+-- Insert trait and genes for 'Colour of flowers'
+INSERT INTO trait (name, locus, chromosome_id) VALUES ('Colour of flowers (P)', 'L3', (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism)));
+INSERT INTO gene (symbol, name, dominant, trait_id) 
+VALUES ('P', 'Purple flower colour', TRUE, 
+    (SELECT trait_id FROM trait WHERE name = 'Colour of flowers (P)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
+INSERT INTO gene (symbol, name, dominant, trait_id) 
+VALUES ('p', 'White flower colour', FALSE, 
+    (SELECT trait_id FROM trait WHERE name = 'Colour of flowers (P)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
 
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '7');
-INSERT INTO trait (name, locus, chromosome_id) VALUES ('Form of ripe seed (R)', 'L1', (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism)));
-INSERT INTO trait (name, locus, chromosome_id) VALUES ('Form of ripe pods (I)', 'L4', (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism)));
-
-
-
 
 -- Inserting fruit fly organism with 8 chromosomes
 INSERT INTO organism (name) VALUES ('fruit fly');
