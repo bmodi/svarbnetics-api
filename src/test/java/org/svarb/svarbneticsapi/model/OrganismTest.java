@@ -3,7 +3,9 @@ package org.svarb.svarbneticsapi.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class OrganismTest {
 
     private Organism organism;
-    private Set<Chromosome> chromosomes;
+    private List<Chromosome> chromosomes;
 
     @BeforeEach
     public void setUp() {
@@ -20,8 +22,8 @@ public class OrganismTest {
         Chromosome chromosome1 = new Chromosome(1, "Chromosome1", new HashSet<>());
         Chromosome chromosome2 = new Chromosome(2, "Chromosome2", new HashSet<>());
 
-        // Create a set of chromosomes and add the created chromosomes to it
-        chromosomes = new HashSet<>();
+        // Create a list of chromosomes and add the created chromosomes to it
+        chromosomes = new ArrayList<>();
         chromosomes.add(chromosome1);
         chromosomes.add(chromosome2);
 

@@ -1,16 +1,16 @@
 package org.svarb.svarbneticsapi.model;
 
-import java.util.Set;
+import java.util.List;
 
 public class Organism {
     private int id;
     private String name;
-    private Set<Chromosome> chromosomes;
+    private List<Chromosome> chromosomes;
 
     public Organism() {}
     
     // Constructor
-    public Organism(int id, String name, Set<Chromosome> chromosomes) {
+    public Organism(int id, String name, List<Chromosome> chromosomes) {
         this.id = id;
         this.name = name;
         this.chromosomes = chromosomes;
@@ -33,11 +33,11 @@ public class Organism {
         this.name = name;
     }
 
-    public Set<Chromosome> getChromosomes() {
+    public List<Chromosome> getChromosomes() {
         return chromosomes;
     }
 
-    public void setChromosomes(Set<Chromosome> chromosomes) {
+    public void setChromosomes(List<Chromosome> chromosomes) {
         this.chromosomes = chromosomes;
     }
 }
