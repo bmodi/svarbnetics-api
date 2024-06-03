@@ -21,4 +21,8 @@ public interface ChromosomeMapper {
         @Result(property = "number", column = "number")
     })
     Chromosome findById(@Param("id") int id);
+    
+    @Select("SELECT * FROM chromosome WHERE organism_id = #{organismId}")
+    List<Chromosome> findByOrganismId(@Param("organismId") int organismId);
+    
 }
