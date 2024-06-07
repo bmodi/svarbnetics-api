@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.svarb.svarbneticsapi.mapper.OrganismMapper">
+
+    <!-- Result Map for Organism -->
+    <resultMap id="organismResultMap" type="org.svarb.svarbneticsapi.model.Organism">
+        <id property="id" column="organism_id"/>
+        <result property="name" column="name"/>
+        <collection property="chromosomes" ofType="org.svarb.svarbneticsapi.model.Chromosome"
+                    column="organism_id" select="org.svarb.svarbneticsapi.mapper.ChromosomeMapper.findByOrganismId"/>
+    </resultMap>
+
+    <!-- Select all organisms -->
+    <select id="findAll" resultMap="organismResultMap">
+        SELECT * FROM organism
+    </select>
+
+    <!-- Select organism by id -->
+    <select id="findById" parameterType="int" resultMap="organismResultMap">
+        SELECT * FROM organism WHERE organism_id = #{id}
+    </select>
+
+</mapper>

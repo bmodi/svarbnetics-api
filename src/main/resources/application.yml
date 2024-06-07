@@ -17,3 +17,13 @@ spring:
   h2:
     console:
       enabled: true
+
+logging:
+  level:
+    org.mybatis: TRACE
+    org.svarb.svarbneticsapi.mapper.OrganismMapper: TRACE
+    org.svarb.svarbneticsapi.mapper.ChromosomeMapper: TRACE
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.svarb.svarbneticsapi.model
