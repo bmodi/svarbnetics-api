@@ -38,14 +38,22 @@ INSERT INTO trait (name, locus, chromosome_id) VALUES ('Position of flowers (A)'
 
 -- Insert genes for 'Color of seed albumen (Y)'
 INSERT INTO gene (symbol, name, dominant, trait_id) 
-VALUES ('Y', 'Dominant allele for yellow seed color', TRUE, 
-    (SELECT trait_id FROM trait WHERE name = 'Color of seed albumen (Y)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
+VALUES ('Y', 'Yellow seed color', TRUE, 
+    (SELECT trait_id FROM trait WHERE name = 'Color of seed albumen (Y)' AND chromosome_id = (SELECT chromosome_id FROM chromosome WHERE chromosome_number = '1' AND organism_id = (SELECT MAX(organism_id) FROM organism))));
 
 INSERT INTO gene (symbol, name, dominant, trait_id) 
-VALUES ('y', 'Recessive allele for green seed color', FALSE,
-    (SELECT trait_id FROM trait WHERE name = 'Color of seed albumen (Y)' AND chromosome_id = (SELECT MAX(chromosome_id) FROM chromosome WHERE organism_id = (SELECT MAX(organism_id) FROM organism))));
+VALUES ('y', 'Green seed color', FALSE,
+    (SELECT trait_id FROM trait WHERE name = 'Color of seed albumen (Y)' AND chromosome_id = (SELECT chromosome_id FROM chromosome WHERE chromosome_number = '1' AND organism_id = (SELECT MAX(organism_id) FROM organism))));
 
+-- Insert genes for 'Position of flowers (A)'
+INSERT INTO gene (symbol, name, dominant, trait_id) 
+VALUES ('A', 'Axial flower position', TRUE, 
+    (SELECT trait_id FROM trait WHERE name = 'Position of flowers (A)' AND chromosome_id = (SELECT chromosome_id FROM chromosome WHERE chromosome_number = '1' AND organism_id = (SELECT MAX(organism_id) FROM organism))));
 
+INSERT INTO gene (symbol, name, dominant, trait_id) 
+VALUES ('a', 'Terminal flower position', FALSE, 
+    (SELECT trait_id FROM trait WHERE name = 'Position of flowers (A)' AND chromosome_id = (SELECT chromosome_id FROM chromosome WHERE chromosome_number = '1' AND organism_id = (SELECT MAX(organism_id) FROM organism))));
+    
 
 
 INSERT INTO chromosome (organism_id, chromosome_number) VALUES ((SELECT MAX(organism_id) FROM organism), '2');
