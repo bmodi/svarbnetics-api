@@ -8,7 +8,7 @@ CREATE TABLE organism (
 CREATE TABLE chromosome (
   chromosome_id IDENTITY PRIMARY KEY,
   organism_id INT NOT NULL,
-  chromosome_number VARCHAR(50) NOT NULL,
+  number VARCHAR(50) NOT NULL,
   CONSTRAINT fk_organism FOREIGN KEY (organism_id) REFERENCES organism(organism_id)
 );
 
@@ -31,12 +31,12 @@ CREATE TABLE gene (
     FOREIGN KEY (trait_id) REFERENCES trait(trait_id)
 );
 
-
 -- Create a view to combine organism, trait and gene data
 CREATE VIEW organism_gene_view AS
 SELECT
+    o.organism_id AS organism_id,
     o.name AS organism_name,
-    c.chromosome_number,
+    c.number AS chromosome_number,
     t.locus,
     t.name AS trait_name,
     g.symbol AS gene_symbol,
